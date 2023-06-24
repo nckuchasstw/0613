@@ -14,15 +14,24 @@
     <link href="
     https://cdn.jsdelivr.net/npm/vue-loading-overlay@6.0.3/dist/css/index.min.css
     " rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
 
    
 
     
 </head>
 <body>
-<div id="app">
-  
 
+  <style>
+    :root{
+    --swiper-theme-color:#2F3E45;
+   }
+ 
+  </style>
+<div id="app">
     <nav class="navbar navbar-expand-lg  sticky-top border-bottom border-primary border-4 px-5 bg-white ">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
@@ -162,19 +171,18 @@
     </section>
 
 <section class="py-5">
-  <div class="container  ">
+  <div class="container">
     <div class="row">
-      <div class="col-6 ">
-        <div class="video-container active reveal fade-left">
+      <div class="col-6">
+        <div class="video-container" data-aos="zoom-in-up">
           <iframe width="560" height="310" src="https://www.youtube.com/embed/HX0MXrZ8eKI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
       </div>
       <div class="col-6 ">
-        <div class="video-container active reveal fade-right">
+        <div class="video-container" data-aos="zoom-in-up">
           <iframe width="560" height="310" src="https://www.youtube.com/embed/KHscG5q3bZI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
       </div>
-     
     </div>
   </div>
 </section>
@@ -243,7 +251,7 @@
           <div class="container">
               <div class="row row-cols-1 row-cols-md-3 g-4">
                   <div class="col">
-                    <div class="card h-100 hover-effect active reveal fade-left">
+                    <div class="card h-100 hover-effect" data-aos="zoom-out-down">
                       <img src="https://chass.ncku.edu.tw/var/file/11/1011/img/481939115.png" class="card-img-top " alt="https://chass.ncku.edu.tw/var/file/11/1011/img/806346787.jpg">
                       <div class="card-body">
                         <h5 class="card-title">「一首歌，一個時代」音樂會</h5>
@@ -255,7 +263,7 @@
                     </div>
                   </div>
                   <div class="col">
-                    <div class="card h-100 hover-effect active reveal fade-bottom">
+                    <div class="card h-100 hover-effect" data-aos="zoom-out-down">
                       <img src="https://chass.ncku.edu.tw/var/file/11/1011/img/481939115.png" class="card-img-top" alt="https://chass.ncku.edu.tw/var/file/11/1011/img/806346787.jpg">
                       <div class="card-body">
                         <h5 class="card-title">街頭Street Demostration</h5>
@@ -267,7 +275,7 @@
                     </div>
                   </div>
                   <div class="col">
-                    <div class="card h-100 hover-effect active reveal fade-right">
+                    <div class="card h-100 hover-effect" data-aos="zoom-out-down">
                       <img src="https://chass.ncku.edu.tw/var/file/11/1011/img/162141217.png" class="card-img-top" alt="https://chass.ncku.edu.tw/var/file/11/1011/img/806346787.jpg">
                       <div class="card-body">
                         <h5 class="card-title">2022臺灣學：福爾摩沙--重伸、再生、和聲</h5>
@@ -281,7 +289,18 @@
                 </div>
           </div>
       </section>
-  
+
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" v-for="i in swiperImg" :key="i.index">
+        <a :href="i.url">
+          <img :src="i.image" alt="">
+        </a>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+
 
 
 <footer class="footer  py-5 bg-primary ">
@@ -308,10 +327,15 @@
     網站更新日期：2023.05.16
     </p>
 </footer>
-<loading v-model:active="isLoading">
-  <div class="loadingio-spinner-ellipsis-h2dag93sl6f"><div class="ldio-kmdc41ctfwp">
-    <div></div><div></div><div></div><div></div><div></div>
-    </div></div>
+<loading v-model:active="isLoading"
+        :is-full-page="fullPage"
+        :lock-scroll="true"
+        loader="bars"
+        background-color="#DED2B0"
+        opacity="0.8"
+        transition="ease"
+        color="white">
+  
   </loading>
 </div>
     
@@ -321,6 +345,7 @@
 <script src="
 https://cdn.jsdelivr.net/npm/vue-loading-overlay@6.0.3/dist/index.min.js
 "></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="main.js"></script>
 <script>
   AOS.init({
@@ -345,7 +370,12 @@ https://cdn.jsdelivr.net/npm/vue-loading-overlay@6.0.3/dist/index.min.js
   anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
 
 });
+
+
 </script>
+
+
+
       
     
 </body>
